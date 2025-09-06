@@ -101,13 +101,15 @@ const ProductDetails = () => {
       </div>
 
       {/* Description Full Width */}
-      <div className="description-container">
-        <h4>
-          <i className="fas fa-info-circle"></i> Description
-        </h4>
-        <p>{product.description}</p>
-      </div>
-
+     <div className="description-container">
+  <h4>
+    <i className="fas fa-info-circle"></i> Description
+  </h4>
+  <div
+    className="product-description"
+    dangerouslySetInnerHTML={{ __html: product.description }}
+  />
+</div>
       {/* Similar Products */}
       <div className="similar-products">
         <h4>Similar Products</h4>
