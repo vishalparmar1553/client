@@ -8,11 +8,12 @@ const About = () => {
       <div className="container my-5">
         <div className="row align-items-center">
           {/* Image Section */}
-          <div className="col-md-6 mb-4">
+          <div className="col-md-6 mb-4" style={{ marginTop: "100px" }}>
             <img
-              src="/logo.png"
+              src="/logo2.png"
               alt="About Blackburn Enterprise"
               className="img-fluid rounded"
+              style={{ width: "500px", height: "500px" }}
             />
           </div>
 

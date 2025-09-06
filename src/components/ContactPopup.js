@@ -65,7 +65,13 @@ const BottomLeftPopup = () => {
           gap: "6px",
         }}
       >
-        <FaPhone /> +91 79849 50340
+        <FaPhone />
+        <a
+          href="tel:+919664650340"
+          style={{ textDecoration: "none", color: "inherit" }}
+        >
+          +91 96646 50340
+        </a>
       </p>
 
       <p

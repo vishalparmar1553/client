@@ -82,31 +82,47 @@ const Footer = () => {
               style={{
                 display: "flex",
                 justifyContent: "center",
+                alignItems: "center", // ✅ ensures vertical centering
                 gap: "20px",
-                fontSize: "28px",
               }}
             >
               <a
                 href="https://www.amazon.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                style={{ color: "#ff9900" }}
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
               >
-                <FaAmazon />
+                <img
+                  src="/amazon.png"
+                  alt="Amazon"
+                  style={{
+                    width: "32px", // match size with icons
+                    height: "32px",
+                    objectFit: "contain",
+                    verticalAlign: "middle",
+                    marginTop: "10px", // ✅ aligns inline with icons
+                  }}
+                />
               </a>
+
               <a
                 href="https://www.instagram.com/blackburn_enterprise?igsh=MW5pNWw2a294MmprbA%3D%3D&utm_source=qr"
                 target="_blank"
                 rel="noopener noreferrer"
-                style={{ color: "#e1306c" }}
+                style={{ color: "#e1306c", fontSize: "32px" }} // ✅ match image size
               >
                 <FaInstagram />
               </a>
+
               <a
                 href="https://www.facebook.com/share/19Z1E82Lqs/?mibextid=wwXIfr"
                 target="_blank"
                 rel="noopener noreferrer"
-                style={{ color: "#1877f2" }}
+                style={{ color: "#1877f2", fontSize: "32px" }} // ✅ match image size
               >
                 <FaFacebook />
               </a>

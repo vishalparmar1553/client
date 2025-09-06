@@ -141,7 +141,7 @@ const HomePage = () => {
             ))}
           </div>
           {/* price filter */}
-          <h4 className="text-center mt-4">Filter By Price</h4>
+          {/* <h4 className="text-center mt-4">Filter By Price</h4>
           <div className="d-flex flex-column">
             <Radio.Group onChange={(e) => setRadio(e.target.value)}>
               {Prices?.map((p) => (
@@ -150,7 +150,7 @@ const HomePage = () => {
                 </div>
               ))}
             </Radio.Group>
-          </div>
+          </div> */}
           <div className="d-flex flex-column">
             <button
               className="btn btn-danger"

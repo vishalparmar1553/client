@@ -50,9 +50,20 @@ const Header = () => {
               <img
                 src="/logo.png"
                 alt="Blackburn Logo"
-                style={{ height: "50px", width: "auto" }}
+                style={{ height: "70px", width: "auto" }}
               />
-              <span style={{ margin: 0, fontSize: "16px", fontWeight: "bold" }}>
+              <span
+                style={{
+                  margin: 0,
+                  fontSize: "18px",
+                  fontWeight: "bold",
+                  fontFamily: "'Poppins', sans-serif",
+                  background:
+                    "linear-gradient(90deg, #FFD700, #B8860B, #000000)", // gold → dark brown → black
+                  WebkitBackgroundClip: "text",
+                  WebkitTextFillColor: "transparent",
+                }}
+              >
                 Blackburn Enterprise
               </span>
             </Link>
