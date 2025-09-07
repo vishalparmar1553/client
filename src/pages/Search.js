@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React from "react";
 import Layout from "./../components/Layout/Layout";
 import { useSearch } from "../context/search";
@@ -17,7 +18,7 @@ const Search = () => {
             {values?.results.map((p) => (
               <div className="card m-2" style={{ width: "18rem" }}>
                 <img
-                  src={`https://backend-bbe-teal.vercel.app/api/v1/product/product-photo/${p._id}`}
+                  src={`${process.env.REACT_APP_API}/api/v1/product/product-photo/${p._id}`}
                   className="card-img-top"
                   alt={p.name}
                 />

@@ -1,7 +1,8 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { Checkbox, Radio } from "antd";
-import { Prices } from "../components/Prices";
+import { Checkbox } from "antd";
 import { useCart } from "../context/cart";
 import axios from "axios";
 import toast from "react-hot-toast";
@@ -24,7 +25,7 @@ const HomePage = () => {
   const getAllCategory = async () => {
     try {
       const { data } = await axios.get(
-        "https://backend-bbe-teal.vercel.app/api/v1/category/get-category"
+        `${process.env.REACT_APP_API}/api/v1/category/get-category`
       );
       if (data?.success) {
         setCategories(data?.category);
@@ -43,7 +44,7 @@ const HomePage = () => {
     try {
       setLoading(true);
       const { data } = await axios.get(
-        `https://backend-bbe-teal.vercel.app/api/v1/product/product-list/${page}`
+        `${process.env.REACT_APP_API}/api/v1/product/product-list/${page}`
       );
       setLoading(false);
       setProducts(data.products);
@@ -57,7 +58,7 @@ const HomePage = () => {
   const getTotal = async () => {
     try {
       const { data } = await axios.get(
-        "https://backend-bbe-teal.vercel.app/api/v1/product/product-count"
+        `${process.env.REACT_APP_API}/api/v1/product/product-count`
       );
       setTotal(data?.total);
     } catch (error) {
@@ -74,7 +75,7 @@ const HomePage = () => {
     try {
       setLoading(true);
       const { data } = await axios.get(
-        `https://backend-bbe-teal.vercel.app/api/v1/product/product-list/${page}`
+        `${process.env.REACT_APP_API}/api/v1/product/product-list/${page}`
       );
       setLoading(false);
       setProducts([...products, ...data?.products]);
@@ -106,7 +107,7 @@ const HomePage = () => {
   const filterProduct = async () => {
     try {
       const { data } = await axios.post(
-        "https://backend-bbe-teal.vercel.app/api/v1/product/product-filters",
+        `${process.env.REACT_APP_API}/api/v1/product/product-filters`,
         {
           checked,
           radio,
@@ -166,23 +167,21 @@ const HomePage = () => {
             {products?.map((p) => (
               <div className="card m-2" key={p._id}>
                 <img
-                  src={`https://backend-bbe-teal.vercel.app/api/v1/product/product-photo/${p._id}`}
+                  src={`${process.env.REACT_APP_API}/api/v1/product/product-photo/${p._id}`}
                   className="card-img-top"
                   alt={p.name}
                 />
                 <div className="card-body">
                   <div className="card-name-price">
                     <h5 className="card-title">{p.name}</h5>
-                    <h5 className="card-title card-price">
-                      {p.price.toLocaleString("en-US", {
-                        style: "currency",
-                        currency: "USD",
-                      })}
-                    </h5>
                   </div>
-                  <p className="card-text ">
-                    {p.description.substring(0, 60)}...
-                  </p>
+                  <h5 className="card-title card-price">
+                    {p.price.toLocaleString("en-IN", {
+                      style: "currency",
+                      currency: "INR",
+                    })}
+                  </h5>
+                  <p className="card-text ">{p?.category?.name}</p>
                   <div className="card-name-price">
                     <button
                       className="btn btn-info ms-1"

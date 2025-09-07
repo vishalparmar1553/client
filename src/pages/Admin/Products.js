@@ -11,7 +11,7 @@ const Products = () => {
   const getAllProducts = async () => {
     try {
       const { data } = await axios.get(
-        "https://backend-bbe-teal.vercel.app/api/v1/product/get-product"
+        `${process.env.REACT_APP_API}/api/v1/product/get-product`
       );
       setProducts(data.products);
     } catch (error) {
@@ -41,7 +41,7 @@ const Products = () => {
               >
                 <div className="card m-2" style={{ width: "18rem" }}>
                   <img
-                    src={`https://backend-bbe-teal.vercel.app/api/v1/product/product-photo/${p._id}`}
+                    src={`${process.env.REACT_APP_API}/api/v1/product/product-photo/${p._id}`}
                     className="card-img-top"
                     alt={p.name}
                   />

@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { useState, useEffect } from "react";
 import { useAuth } from "../../context/auth";
 import { Outlet } from "react-router-dom";
@@ -11,7 +12,7 @@ export default function PrivateRoute() {
   useEffect(() => {
     const authCheck = async () => {
       const res = await axios.get(
-        "https://backend-bbe-teal.vercel.app/api/v1/auth/user-auth"
+        `${process.env.REACT_APP_API}/api/v1/auth/user-auth`
       );
       if (res.data.ok) {
         setOk(true);

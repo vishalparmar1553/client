@@ -1,10 +1,11 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable array-callback-return */
 import React, { useState, useEffect } from "react";
 import Layout from "./../components/Layout/Layout";
 import { useCart } from "../context/cart";
 import { useAuth } from "../context/auth";
 import { useNavigate } from "react-router-dom";
 import DropIn from "braintree-web-drop-in-react";
-import { AiFillWarning } from "react-icons/ai";
 import axios from "axios";
 import toast from "react-hot-toast";
 import "../styles/CartStyles.css";
@@ -49,7 +50,7 @@ const CartPage = () => {
   const getToken = async () => {
     try {
       const { data } = await axios.get(
-        "https://backend-bbe-teal.vercel.app/api/v1/product/braintree/token"
+        `${process.env.REACT_APP_API}/api/v1/product/braintree/token`
       );
       setClientToken(data?.clientToken);
     } catch (error) {
@@ -65,8 +66,9 @@ const CartPage = () => {
     try {
       setLoading(true);
       const { nonce } = await instance.requestPaymentMethod();
+      // eslint-disable-next-line no-unused-vars
       const { data } = await axios.post(
-        "https://backend-bbe-teal.vercel.app/api/v1/product/braintree/payment",
+        `${process.env.REACT_APP_API}/api/v1/product/braintree/payment`,
         {
           nonce,
           cart,
@@ -108,7 +110,7 @@ const CartPage = () => {
                 <div className="row card flex-row" key={p._id}>
                   <div className="col-md-4">
                     <img
-                      src={`https://backend-bbe-teal.vercel.app/api/v1/product/product-photo/${p._id}`}
+                      src={`${process.env.REACT_APP_API}/api/v1/product/product-photo/${p._id}`}
                       className="card-img-top"
                       alt={p.name}
                       width="100%"

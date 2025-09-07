@@ -21,7 +21,7 @@ const ProductDetails = () => {
   const getProduct = async () => {
     try {
       const { data } = await axios.get(
-        `https://backend-bbe-teal.vercel.app/api/v1/product/get-product/${params.slug}`
+        `${process.env.REACT_APP_API}/api/v1/product/get-product/${params.slug}`
       );
       setProduct(data?.product);
       getSimilarProduct(data?.product._id, data?.product.category._id);
@@ -33,7 +33,7 @@ const ProductDetails = () => {
   const getSimilarProduct = async (pid, cid) => {
     try {
       const { data } = await axios.get(
-        `https://backend-bbe-teal.vercel.app/api/v1/product/related-product/${pid}/${cid}`
+        `${process.env.REACT_APP_API}/api/v1/product/related-product/${pid}/${cid}`
       );
       setRelatedProducts(data?.products);
     } catch (error) {
@@ -53,10 +53,10 @@ const ProductDetails = () => {
   return (
     <Layout>
       {/* Top Row: Image + Info */}
-      <div className="product-container">
+      <div className="product-container" style={{ marginTop: "100px" }}>
         <div className="product-image">
           <img
-            src={`https://backend-bbe-teal.vercel.app/api/v1/product/product-photo/${product._id}`}
+            src={`${process.env.REACT_APP_API}/api/v1/product/product-photo/${product._id}`}
             alt={product.name}
           />
         </div>
@@ -101,15 +101,15 @@ const ProductDetails = () => {
       </div>
 
       {/* Description Full Width */}
-     <div className="description-container">
-  <h4>
-    <i className="fas fa-info-circle"></i> Description
-  </h4>
-  <div
-    className="product-description"
-    dangerouslySetInnerHTML={{ __html: product.description }}
-  />
-</div>
+      <div className="description-container">
+        <h4>
+          <i className="fas fa-info-circle"></i> Description
+        </h4>
+        <div
+          className="product-description"
+          dangerouslySetInnerHTML={{ __html: product.description }}
+        />
+      </div>
       {/* Similar Products */}
       <div className="similar-products">
         <h4>Similar Products</h4>
@@ -118,7 +118,7 @@ const ProductDetails = () => {
           {relatedProducts?.map((p) => (
             <div className="similar-card" key={p._id}>
               <img
-                src={`https://backend-bbe-teal.vercel.app/api/v1/product/product-photo/${p._id}`}
+                src={`${process.env.REACT_APP_API}/api/v1/product/product-photo/${p._id}`}
                 alt={p.name}
               />
               <h5>{p.name}</h5>

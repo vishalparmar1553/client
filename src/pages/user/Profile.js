@@ -28,7 +28,7 @@ const Profile = () => {
     e.preventDefault();
     try {
       const { data } = await axios.put(
-        "https://backend-bbe-teal.vercel.app/api/v1/auth/profile",
+        `${process.env.REACT_APP_API}/api/v1/auth/profile`,
         {
           name,
           email,
