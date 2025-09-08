@@ -28,7 +28,7 @@ const Footer = () => {
           {/* Quick Links */}
           <div
             className="footer-col"
-            style={{ flex: "1 1 250px", minWidth: "200px" }}
+            style={{ flex: "1 1 220px", minWidth: "200px" }}
           >
             <h5 className="fw-bold mb-3">Quick Links</h5>
             <ul style={{ listStyle: "none", padding: 0, lineHeight: "2" }}>
@@ -62,7 +62,7 @@ const Footer = () => {
           {/* Contact Info */}
           <div
             className="footer-col"
-            style={{ flex: "1 1 250px", minWidth: "200px" }}
+            style={{ flex: "1 1 220px", minWidth: "200px" }}
           >
             <h5 className="fw-bold mb-3">Contact Us</h5>
             <p style={{ margin: 0, color: "#ccc" }}>
@@ -100,7 +100,7 @@ const Footer = () => {
           <div
             className="footer-col"
             style={{
-              flex: "1 1 250px",
+              flex: "1 1 220px",
               minWidth: "200px",
               textAlign: "center",
             }}
@@ -115,27 +115,6 @@ const Footer = () => {
                 flexWrap: "wrap",
               }}
             >
-              <a
-                href="https://www.amazon.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                }}
-              >
-                <img
-                  src="/amazon.png"
-                  alt="Amazon"
-                  style={{
-                    width: "32px",
-                    height: "32px",
-                    objectFit: "contain",
-                    marginTop: "10px",
-                  }}
-                />
-              </a>
               <a
                 href="https://www.instagram.com/blackburn_enterprise"
                 target="_blank"
@@ -155,7 +134,66 @@ const Footer = () => {
             </div>
           </div>
         </div>
-
+        {/* Also Available On */}
+        <div
+          className="footer-col"
+          style={{
+            flex: "1 1 220px",
+            textAlign: "center",
+            border: "1px solid white",
+            borderRadius: "5px",
+            padding: "5px",
+          }}
+        >
+          <h5 className="fw-bold">Also Available On</h5>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              gap: "20px",
+              flexWrap: "wrap",
+              paddingBottom: "10px",
+            }}
+          >
+            <a
+              href="https://www.amazon.in"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <img src="/amazon.png" alt="Amazon" style={{ height: "40px" }} />
+            </a>
+            <a
+              href="https://www.flipkart.com"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <img
+                src="/flipkart.png"
+                alt="Flipkart"
+                style={{ height: "40px" }}
+              />
+            </a>
+            <a
+              href="https://www.meesho.com"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <img src="/meesho.png" alt="Meesho" style={{ height: "40px" }} />
+            </a>
+            <a
+              href="https://www.indiamart.com"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <img
+                src="/indiamart.png"
+                alt="IndiaMart"
+                style={{ height: "40px" }}
+              />
+            </a>
+          </div>
+        </div>
         {/* Divider */}
         <hr style={{ borderColor: "#444", margin: "30px 0" }} />
 

@@ -124,17 +124,12 @@ const HomePage = () => {
     }
   };
 
-  // sorting logic
   useEffect(() => {
     let sorted = [...products];
     if (sortOrder === "new") {
-      sorted = sorted.reverse(); // assuming backend sends oldest first
     } else if (sortOrder === "old") {
+      sorted = sorted.reverse(); // assuming backend sends oldest first
       // keep as is
-    } else if (sortOrder === "az") {
-      sorted.sort((a, b) => a.name.localeCompare(b.name));
-    } else if (sortOrder === "za") {
-      sorted.sort((a, b) => b.name.localeCompare(a.name));
     } else if (sortOrder === "low") {
       sorted.sort((a, b) => a.price - b.price);
     } else if (sortOrder === "high") {
@@ -204,8 +199,6 @@ const HomePage = () => {
               >
                 <Option value="new">New → Old</Option>
                 <Option value="old">Old → New</Option>
-                <Option value="az">A → Z</Option>
-                <Option value="za">Z → A</Option>
                 <Option value="low">Price: Low → High</Option>
                 <Option value="high">Price: High → Low</Option>
               </Select>
@@ -250,7 +243,7 @@ const HomePage = () => {
                             toast.success("Item Added to cart");
                           }}
                         >
-                          ADD
+                          ADD TO CART
                         </button>
                       </div>
                     </div>
@@ -273,7 +266,7 @@ const HomePage = () => {
                     "Loading ..."
                   ) : (
                     <>
-                      Load More <AiOutlineReload />
+                      More Products <AiOutlineReload />
                     </>
                   )}
                 </button>
