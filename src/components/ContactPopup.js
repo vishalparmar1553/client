@@ -108,7 +108,15 @@ const BottomLeftPopup = () => {
           gap: "6px",
         }}
       >
-        <FaEnvelope /> support@blackburn.com
+        <FaEnvelope />{" "}
+        <p style={{ margin: 0, color: "#ccc" }}>
+          <a
+            href="mailto:info@blackburnenterprise.com"
+            style={{ color: "#000000", textDecoration: "none" }}
+          >
+            info@blackburnenterprise.com
+          </a>
+        </p>
       </p>
 
       {/* Slide-in Animation */}

@@ -12,10 +12,24 @@ const Footer = () => {
         marginTop: "40px",
       }}
     >
-      <div className="container">
-        <div className="row text-center text-md-start">
-          {/* Page Links */}
-          <div className="col-md-4 mb-4">
+      <div
+        className="footer-container"
+        style={{ maxWidth: "1200px", margin: "0 auto" }}
+      >
+        <div
+          className="footer-row"
+          style={{
+            display: "flex",
+            flexWrap: "wrap",
+            justifyContent: "space-between",
+            gap: "20px",
+          }}
+        >
+          {/* Quick Links */}
+          <div
+            className="footer-col"
+            style={{ flex: "1 1 250px", minWidth: "200px" }}
+          >
             <h5 className="fw-bold mb-3">Quick Links</h5>
             <ul style={{ listStyle: "none", padding: 0, lineHeight: "2" }}>
               <li>
@@ -46,7 +60,10 @@ const Footer = () => {
           </div>
 
           {/* Contact Info */}
-          <div className="col-md-4 mb-4">
+          <div
+            className="footer-col"
+            style={{ flex: "1 1 250px", minWidth: "200px" }}
+          >
             <h5 className="fw-bold mb-3">Contact Us</h5>
             <p style={{ margin: 0, color: "#ccc" }}>
               📍 Halvad, Morbi, Gujarat - 363330
@@ -59,31 +76,43 @@ const Footer = () => {
                 gap: "5px",
               }}
             >
-              <FaWhatsapp style={{ color: "green" }} size={20} />{" "}
+              <FaWhatsapp style={{ color: "green" }} size={20} />
               <a
                 href="https://wa.me/917984950340"
                 target="_blank"
                 rel="noopener noreferrer"
-                style={{
-                  color: "#ccc",
-                  textDecoration: "none",
-                }}
+                style={{ color: "#ccc", textDecoration: "none" }}
               >
                 +91 79849 50340 | 96646 50340
               </a>
             </p>
-            <p style={{ margin: 0, color: "#ccc" }}>✉️ support@blackburn.com</p>
+            <p style={{ margin: 0, color: "#ccc" }}>
+              <a
+                href="mailto:info@blackburnenterprise.com"
+                style={{ color: "#ccc", textDecoration: "none" }}
+              >
+                ✉️ info@blackburnenterprise.com
+              </a>
+            </p>
           </div>
 
           {/* Social Media */}
-          <div className="col-md-4 mb-4 text-center">
+          <div
+            className="footer-col"
+            style={{
+              flex: "1 1 250px",
+              minWidth: "200px",
+              textAlign: "center",
+            }}
+          >
             <h5 className="fw-bold mb-3">Follow Us</h5>
             <div
               style={{
                 display: "flex",
                 justifyContent: "center",
-                alignItems: "center", // ✅ ensures vertical centering
+                alignItems: "center",
                 gap: "20px",
+                flexWrap: "wrap",
               }}
             >
               <a
@@ -100,29 +129,26 @@ const Footer = () => {
                   src="/amazon.png"
                   alt="Amazon"
                   style={{
-                    width: "32px", // match size with icons
+                    width: "32px",
                     height: "32px",
                     objectFit: "contain",
-                    verticalAlign: "middle",
-                    marginTop: "10px", // ✅ aligns inline with icons
+                    marginTop: "10px",
                   }}
                 />
               </a>
-
               <a
-                href="https://www.instagram.com/blackburn_enterprise?igsh=MW5pNWw2a294MmprbA%3D%3D&utm_source=qr"
+                href="https://www.instagram.com/blackburn_enterprise"
                 target="_blank"
                 rel="noopener noreferrer"
-                style={{ color: "#e1306c", fontSize: "32px" }} // ✅ match image size
+                style={{ color: "#e1306c", fontSize: "32px" }}
               >
                 <FaInstagram />
               </a>
-
               <a
                 href="https://www.facebook.com/share/19Z1E82Lqs/?mibextid=wwXIfr"
                 target="_blank"
                 rel="noopener noreferrer"
-                style={{ color: "#1877f2", fontSize: "32px" }} // ✅ match image size
+                style={{ color: "#1877f2", fontSize: "32px" }}
               >
                 <FaFacebook />
               </a>
@@ -130,16 +156,31 @@ const Footer = () => {
           </div>
         </div>
 
+        {/* Divider */}
+        <hr style={{ borderColor: "#444", margin: "30px 0" }} />
+
         {/* Copyright */}
-        <hr style={{ borderColor: "#444" }} />
-        <div
-          className="text-center"
-          style={{ fontSize: "14px", color: "#aaa" }}
-        >
+        <div style={{ textAlign: "center", fontSize: "14px", color: "#aaa" }}>
           © {new Date().getFullYear()} Blackburn Enterprise | All Rights
           Reserved
         </div>
       </div>
+
+      {/* Responsive styles */}
+      <style>
+        {`
+          @media (max-width: 768px) {
+            .footer-row {
+              flex-direction: column;
+              align-items: center;
+              text-align: center;
+            }
+            .footer-col {
+              text-align: center;
+            }
+          }
+        `}
+      </style>
     </footer>
   );
 };

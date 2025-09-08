@@ -34,7 +34,14 @@ const Contact = () => {
                   <div className="card-body">
                     <BiMailSend size={40} className="text-danger mb-3" />
                     <h5 className="fw-bold">Email</h5>
-                    <p className="text-muted">help@ecommerceapp.com</p>
+                    <p style={{ margin: 0, color: "#ccc" }}>
+                      <a
+                        href="mailto:info@blackburnenterprise.com"
+                        style={{ color: "#2b2929ff", textDecoration: "none" }}
+                      >
+                        ✉️ info@blackburnenterprise.com
+                      </a>
+                    </p>
                   </div>
                 </div>
               </div>

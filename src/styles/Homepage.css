@@ -1,20 +1,48 @@
+/* ==================
+Banner
+================== */
 .banner-img {
   margin-top: 60px;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
 }
 
-.home-page h1 {
+/* ==================
+Homepage Titles
+================== */
+.home-page h1,
+.home-page h2 {
   color: gray;
   font-family: "Playfair Display", serif;
+  text-align: center;
 }
 
+/* ==================
+Homepage Cards
+================== */
 .home-page {
   display: flex;
   flex-wrap: wrap;
 }
+
 .home-page .card {
   background-color: rgba(128, 128, 128, 0.097);
-  width: 18rem;
+  border-radius: 10px;
+  overflow: hidden;
+  width: 100%;
+  transition: transform 0.2s ease;
 }
+
+.home-page .card:hover {
+  transform: scale(0.95);
+}
+
+.home-page .card-img-top {
+  height: 300px !important;
+  object-fit: cover;
+}
+
 .home-page .card-name-price {
   display: flex;
   flex-direction: row;
@@ -25,6 +53,7 @@
   color: green;
   font-weight: bold;
 }
+
 .home-page button {
   border-radius: 0;
   width: 100%;
@@ -38,20 +67,14 @@
   color: rgb(90, 89, 89);
 }
 
-.home-page .card img:hover {
-  transform: scale(0.9);
-}
-
-.home-page .card-img-top {
-  height: 300px !important;
-}
 /* ==================
-filters
-============== */
+Filters
+================== */
 .filters h4 {
-  margin-top: 100px;
+  margin-top: 20px;
   color: gray !important;
   border-bottom: 1px solid rgba(128, 128, 128, 0.337);
+  padding-bottom: 10px;
 }
 
 .ant-checkbox-wrapper:first-of-type {
@@ -61,6 +84,7 @@ filters
 .ant-checkbox-wrapper {
   margin: 2px;
 }
+
 .ant-radio-wrapper {
   margin-bottom: 5px !important;
   margin-left: 10px;
@@ -72,10 +96,262 @@ filters
   border: none;
   border-radius: 0;
   margin-top: 20px;
+  color: white;
 }
 
+/* ==================
+Load More Button
+================== */
 .loadmore {
   color: green;
   font-weight: bold;
   font-size: 20px !important;
+  padding: 10px 20px;
+}
+/* ==================
+Card Images - Responsive & Proportional
+================== */
+.home-page .card-img-top {
+  width: 100%;
+  height: auto; /* keep image proportional */
+  object-fit: cover; /* crop if needed to fill card width */
+  aspect-ratio: 4 / 3; /* maintain a consistent ratio for all cards */
+  transition: transform 0.2s ease;
+}
+
+.home-page .card img:hover {
+  transform: scale(0.95);
+}
+
+/* ==================
+Card Images - Full Image (No Crop)
+================== */
+.home-page .card-img-top {
+  width: 100%;
+  height: 300px; /* fixed card height */
+  object-fit: contain; /* show full image */
+  background-color: #f9f9f9; /* optional: adds light background for empty space */
+  padding: 10px; /* optional: spacing inside card */
+  transition: transform 0.2s ease;
+}
+
+.home-page .card img:hover {
+  transform: scale(0.95);
+}
+
+/* ==================
+Responsive Fixes
+================== */
+@media (max-width: 1200px) {
+  .home-page .card-img-top {
+    height: 250px !important;
+  }
+}
+
+@media (max-width: 992px) {
+  .filters h4 {
+    margin-top: 10px;
+  }
+  .home-page .card-img-top {
+    height: 220px !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .filters {
+    margin-bottom: 20px;
+  }
+
+  .home-page .card-img-top {
+    height: 200px !important;
+  }
+
+  .home-page .card {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+
+  .home-page .card-name-price {
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .home-page button {
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 576px) {
+  .home-page .card-img-top {
+    height: 180px !important;
+  }
+
+  .loadmore {
+    font-size: 18px !important;
+  }
+}
+
+/* Banner */
+.banner-img {
+  margin-top: 60px;
+  border-radius: 12px;
+  object-fit: cover;
+}
+
+/* Home Page */
+.home-page {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+/* Filters */
+.filters {
+  background: #fff;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+}
+
+.filters h4 {
+  font-weight: 600;
+  font-size: 1.3rem;
+  margin-bottom: 15px;
+  color: #333;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.filter-body {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  transition: max-height 0.3s ease, opacity 0.3s ease;
+}
+
+.filter-body.show {
+  display: flex;
+}
+
+.filter-checkbox {
+  font-size: 1rem;
+  padding: 8px 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.filter-checkbox:hover {
+  background-color: #f9f9f9;
+}
+
+.reset-btn {
+  background: #ff4d4f;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 0;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.reset-btn:hover {
+  background: #e43f3f;
+}
+
+.toggle-filters {
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+  .filter-body {
+    display: none;
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+  }
+  .filter-body.show {
+    display: flex;
+    max-height: 500px;
+    opacity: 1;
+  }
+}
+
+/* Cards */
+.card {
+  border-radius: 12px;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.12);
+}
+
+.card-img-top {
+  object-fit: cover;
+  height: 200px;
+}
+
+.card-title {
+  font-weight: 600;
+  font-size: 1.1rem;
+}
+
+.card-price {
+  font-weight: 700;
+  color: #27ae60;
+}
+
+.btn-info {
+  background: #3498db;
+  border: none;
+  transition: all 0.3s ease;
+}
+
+.btn-info:hover {
+  background: #2980b9;
+}
+
+.btn-dark {
+  background: #2c3e50;
+  border: none;
+}
+
+.btn-dark:hover {
+  background: #1a252f;
+}
+
+/* Load More button */
+.loadmore {
+  background: #27ae60;
+  color: #fff;
+  border-radius: 8px;
+  padding: 10px 20px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.loadmore:hover {
+  background: #219150;
+}
+
+/* Fix checkbox alignment */
+.filter-body .ant-checkbox-wrapper {
+  display: flex;
+  align-items: center; /* vertically center text with checkbox */
+  gap: 8px; /* space between box and label */
+}
+
+.filter-body .ant-checkbox-inner {
+  width: 18px;
+  height: 18px;
+}
+
+.filter-body .ant-checkbox + span {
+  line-height: 1.5;
 }
