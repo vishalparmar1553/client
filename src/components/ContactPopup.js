@@ -12,25 +12,36 @@ const BottomLeftPopup = () => {
   const [showHelpBtn, setShowHelpBtn] = useState(false);
 
   useEffect(() => {
-    // Open initially
-    setShow(true);
+    const popupClosed = localStorage.getItem("popupClosed");
 
-    // Auto close after 10s
-    const timer = setTimeout(() => {
-      handleClose();
-    }, 10000);
+    if (!popupClosed) {
+      // Show only once
+      setShow(true);
 
-    return () => clearTimeout(timer);
+      // Auto close after 10s
+      const timer = setTimeout(() => {
+        handleClose(true);
+      }, 10000);
+
+      return () => clearTimeout(timer);
+    } else {
+      // Already closed → just show the icon
+      setShow(false);
+      setShowHelpBtn(true);
+    }
   }, []);
 
-  const handleClose = () => {
+  // Close handler (manual or auto)
+  const handleClose = (auto = false) => {
     setShow(false);
-    setShowHelpBtn(true); // show help button after close
+    setShowHelpBtn(true);
+    localStorage.setItem("popupClosed", "true"); // remember closed
   };
 
+  // Reopen from help button (only when clicked)
   const handleOpen = () => {
     setShow(true);
-    setShowHelpBtn(false); // hide help button when popup opens
+    setShowHelpBtn(false);
   };
 
   return (
@@ -54,7 +65,7 @@ const BottomLeftPopup = () => {
         >
           {/* Close Button */}
           <button
-            onClick={handleClose}
+            onClick={() => handleClose(false)}
             style={{
               position: "absolute",
               top: "8px",
@@ -66,10 +77,6 @@ const BottomLeftPopup = () => {
               cursor: "pointer",
               transition: "transform 0.2s",
             }}
-            onMouseEnter={(e) =>
-              (e.currentTarget.style.transform = "scale(1.2)")
-            }
-            onMouseLeave={(e) => (e.currentTarget.style.transform = "scale(1)")}
           >
             <FaTimes />
           </button>
@@ -103,7 +110,7 @@ const BottomLeftPopup = () => {
               gap: "6px",
             }}
           >
-            <FaWhatsapp color="#25D366" />{" "}
+            <FaWhatsapp color="#25D366" />
             <a
               href="https://wa.me/917984950340"
               target="_blank"
@@ -114,8 +121,6 @@ const BottomLeftPopup = () => {
                 fontWeight: "500",
                 transition: "color 0.2s",
               }}
-              onMouseEnter={(e) => (e.currentTarget.style.color = "#006400")}
-              onMouseLeave={(e) => (e.currentTarget.style.color = "#111")}
             >
               WhatsApp Chat
             </a>
@@ -129,18 +134,15 @@ const BottomLeftPopup = () => {
               gap: "6px",
             }}
           >
-            <FaEnvelope />{" "}
-            <span style={{ margin: 0, color: "#000" }}>
-              <a
-                href="mailto:info@blackburnenterprise.com"
-                style={{ color: "#000000", textDecoration: "none" }}
-              >
-                info@blackburnenterprise.com
-              </a>
-            </span>
+            <FaEnvelope />
+            <a
+              href="mailto:info@blackburnenterprise.com"
+              style={{ color: "#000", textDecoration: "none" }}
+            >
+              info@blackburnenterprise.com
+            </a>
           </p>
 
-          {/* Slide-in Animation */}
           <style>
             {`
               @keyframes slideIn {

@@ -27,7 +27,7 @@ const CategoryProduct = () => {
 
   return (
     <Layout>
-      <div className="container mt-3 category">
+      <div className="container mt-3 category" style={{ marginTop: "220px" }}>
         <h4 className="text-center">Category - {category?.name}</h4>
         <h6 className="text-center">{products?.length} result found </h6>
         <div className="row">
@@ -46,13 +46,11 @@ const CategoryProduct = () => {
                       <h5 className="card-title card-price">
                         {p.price.toLocaleString("en-US", {
                           style: "currency",
-                          currency: "USD",
+                          currency: "INR",
                         })}
                       </h5>
                     </div>
-                    <p className="card-text ">
-                      {p.description.substring(0, 60)}...
-                    </p>
+                    <p className="card-text ">{p.category.name}</p>
                     <div className="card-name-price">
                       <button
                         className="btn btn-info ms-1"
