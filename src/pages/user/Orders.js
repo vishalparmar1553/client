@@ -9,6 +9,7 @@ import moment from "moment";
 const Orders = () => {
   const [orders, setOrders] = useState([]);
   const [auth, setAuth] = useAuth();
+
   const getOrders = async () => {
     try {
       const { data } = await axios.get(
@@ -23,66 +24,112 @@ const Orders = () => {
   useEffect(() => {
     if (auth?.token) getOrders();
   }, [auth?.token]);
+
   return (
     <Layout title={"Your Orders"}>
-      <div className="container-flui p-3 m-3 dashboard">
+      <div className="container-fluid py-4 px-3 dashboard">
         <div className="row">
-          <div className="col-md-3">
+          {/* Sidebar */}
+          <div className="col-md-3 mb-4">
             <UserMenu />
           </div>
+
+          {/* Orders Section */}
           <div className="col-md-9">
-            <h1 className="text-center">All Orders</h1>
-            {orders?.map((o, i) => {
-              return (
-                <div className="border shadow">
-                  <table className="table">
-                    <thead>
-                      <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Status</th>
-                        <th scope="col">Buyer</th>
-                        <th scope="col"> date</th>
-                        <th scope="col">Payment</th>
-                        <th scope="col">Quantity</th>
-                      </tr>
-                    </thead>
+            <h2 className="text-center mb-4 fw-bold">My Orders</h2>
+
+            {orders?.map((o, i) => (
+              <div
+                className="order-card mb-4 p-3 rounded shadow-sm border bg-white"
+                key={o._id}
+              >
+                {/* Order Info */}
+                <div className="d-flex justify-content-between align-items-center flex-wrap mb-3">
+                  <h5 className="mb-0">Order #{i + 1}</h5>
+                  <span
+                    className={`badge px-3 py-2 rounded-pill ${
+                      o?.status === "Delivered"
+                        ? "bg-success"
+                        : o?.status === "Processing"
+                        ? "bg-warning text-dark"
+                        : "bg-secondary"
+                    }`}
+                  >
+                    {o?.status}
+                  </span>
+                </div>
+
+                <div className="table-responsive">
+                  <table className="table table-borderless mb-0">
                     <tbody>
                       <tr>
-                        <td>{i + 1}</td>
-                        <td>{o?.status}</td>
+                        <td className="fw-semibold">Buyer:</td>
                         <td>{o?.buyer?.name}</td>
-                        <td>{moment(o?.createAt).fromNow()}</td>
-                        <td>{o?.payment.success ? "Success" : "Failed"}</td>
+                        <td className="fw-semibold">Date:</td>
+                        <td>{moment(o?.createAt).format("DD MMM YYYY")}</td>
+                      </tr>
+                      <tr>
+                        <td className="fw-semibold">Payment:</td>
+                        <td>
+                          <span className="badge bg-info text-dark">
+                            {o?.payment?.method}
+                          </span>
+                        </td>
+                        <td className="fw-semibold">Items:</td>
                         <td>{o?.products?.length}</td>
                       </tr>
                     </tbody>
                   </table>
-                  <div className="container">
-                    {o?.products?.map((p, i) => (
-                      <div className="row mb-2 p-3 card flex-row" key={p._id}>
-                        <div className="col-md-4">
-                          <img
-                            src={`${process.env.REACT_APP_API}/api/v1/product/product-photo/${p._id}`}
-                            className="card-img-top"
-                            alt={p.name}
-                            width="100px"
-                            height={"100px"}
-                          />
-                        </div>
-                        <div className="col-md-8">
-                          <p>{p.name}</p>
-                          <p>{p.description.substring(0, 30)}</p>
-                          <p>Price : {p.price}</p>
+                </div>
+
+                {/* Product List */}
+                <hr />
+                <div className="row g-3">
+                  {o?.products?.map((p) => (
+                    <div className="col-md-6 col-lg-4" key={p._id}>
+                      <div className="card h-100 border-0 shadow-sm product-card">
+                        <img
+                          src={`${process.env.REACT_APP_API}/api/v1/product/product-photo/${p._id}`}
+                          className="card-img-top rounded-top"
+                          alt={p.name}
+                          style={{ height: "180px", objectFit: "cover" }}
+                        />
+                        <div className="card-body">
+                          <h6 className="fw-bold">{p.name}</h6>
+                          <p className="text-muted small mb-2">
+                            {p.category.name}{" "}
+                          </p>
+                          <p className="mb-0 fw-semibold text-primary">
+                            ₹ {p.price}
+                          </p>
                         </div>
                       </div>
-                    ))}
-                  </div>
+                    </div>
+                  ))}
                 </div>
-              );
-            })}
+              </div>
+            ))}
+
+            {orders?.length === 0 && (
+              <div className="text-center py-5 text-muted">
+                <h5>No orders yet!</h5>
+              </div>
+            )}
           </div>
         </div>
       </div>
+
+      {/* Extra Modern Styles */}
+      <style>{`
+        .order-card:hover {
+          transform: translateY(-3px);
+          transition: 0.3s ease-in-out;
+        }
+        .product-card:hover {
+          transform: scale(1.02);
+          transition: 0.3s ease-in-out;
+        }
+      `}</style>
     </Layout>
   );
 };

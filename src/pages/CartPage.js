@@ -1,11 +1,10 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable array-callback-return */
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Layout from "./../components/Layout/Layout";
 import { useCart } from "../context/cart";
 import { useAuth } from "../context/auth";
 import { useNavigate } from "react-router-dom";
-import DropIn from "braintree-web-drop-in-react";
 import axios from "axios";
 import toast from "react-hot-toast";
 import "../styles/CartStyles.css";
@@ -13,8 +12,6 @@ import "../styles/CartStyles.css";
 const CartPage = () => {
   const [auth, setAuth] = useAuth();
   const [cart, setCart] = useCart();
-  const [clientToken, setClientToken] = useState("");
-  const [instance, setInstance] = useState("");
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
@@ -47,41 +44,28 @@ const CartPage = () => {
     }
   };
 
-  // get payment gateway token
-  const getToken = async () => {
-    try {
-      const { data } = await axios.get(
-        `${process.env.REACT_APP_API}/api/v1/product/braintree/token`
-      );
-      setClientToken(data?.clientToken);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-  useEffect(() => {
-    getToken();
-  }, [auth?.token]);
-
-  // handle payments
-  const handlePayment = async () => {
+  // handle COD order
+  const handleCODOrder = async () => {
     try {
       setLoading(true);
-      const { nonce } = await instance.requestPaymentMethod();
       await axios.post(
-        `${process.env.REACT_APP_API}/api/v1/product/braintree/payment`,
+        `${process.env.REACT_APP_API}/api/v1/product/order-cod`,
+        { cart },
         {
-          nonce,
-          cart,
+          headers: {
+            Authorization: auth?.token,
+          },
         }
       );
       setLoading(false);
       localStorage.removeItem("cart");
       setCart([]);
       navigate("/dashboard/user/orders");
-      toast.success("Payment Completed Successfully");
+      toast.success("Order placed successfully (Cash on Delivery)");
     } catch (error) {
       console.log(error);
       setLoading(false);
+      toast.error("Failed to place order");
     }
   };
 
@@ -165,27 +149,17 @@ const CartPage = () => {
               </div>
             )}
 
-            {/* Payment */}
+            {/* COD Order Button */}
             <div className="payment-box">
-              {!clientToken || !auth?.token || !cart?.length ? null : (
-                <>
-                  <DropIn
-                    options={{
-                      authorization: clientToken,
-                      paypal: { flow: "vault" },
-                    }}
-                    onInstance={(instance) => setInstance(instance)}
-                  />
-
-                  <button
-                    className="primary-btn"
-                    onClick={handlePayment}
-                    disabled={loading || !instance || !auth?.user?.address}
-                  >
-                    {loading ? "Processing..." : "Make Payment"}
-                  </button>
-                </>
-              )}
+              {auth?.token && cart?.length ? (
+                <button
+                  className="primary-btn"
+                  onClick={handleCODOrder}
+                  disabled={loading || !auth?.user?.address}
+                >
+                  {loading ? "Placing Order..." : "Place Order (COD)"}
+                </button>
+              ) : null}
             </div>
           </div>
         </div>
